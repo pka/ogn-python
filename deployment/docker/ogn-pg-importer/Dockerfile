@@ -1,8 +1,8 @@
-FROM debian:bullseye-slim AS builder
+FROM debian:bullseye-slim
 
 RUN apt update && \
     apt install -y --no-install-recommends \
-    wget unzip postgis
+    wget unzip postgresql-client postgis
 
 RUN wget --no-check-certificate -O borders.zip http://thematicmapping.org/downloads/TM_WORLD_BORDERS-0.3.zip && \
     unzip borders.zip -d /extra

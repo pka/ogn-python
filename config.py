@@ -7,9 +7,10 @@ class BaseConfig:
     # Flask-Cache stuff
     CACHE_TYPE = "redis"
     CACHE_DEFAULT_TIMEOUT = 300
+    CACHE_REDIS_HOST = os.environ.get("REDIS_HOST", "localhost")
 
     # Redis stuff
-    REDIS_URL = "redis://localhost:6379/0"
+    REDIS_URL = os.environ.get("REDIS_URL", "redis://localhost:6379/0")
 
     # Celery stuff
     BROKER_URL = os.environ.get("BROKER_URL", REDIS_URL)

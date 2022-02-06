@@ -23,7 +23,8 @@ FROM python:3.9-slim-bullseye AS compile-image
 RUN apt update && \
     apt install -y --no-install-recommends \
     libgeos-c1v5 \
-    libjpeg62 libopenjp2-7 libtiff5 libxcb1
+    libjpeg62 libopenjp2-7 libtiff5 libxcb1 \
+    postgresql-client
 
 # ... get the venv from above
 COPY --from=builder-image /opt/venv /opt/venv
@@ -39,3 +40,6 @@ COPY *.py /app/
 # ... get convenience scripts
 COPY deployment/docker/ogn-python/prestart.sh .
 COPY deployment/docker/ogn-python/wait.sh .
+
+ENV FLASK_APP ogn_python.py
+ENV OGN_CONFIG_MODULE config.py
